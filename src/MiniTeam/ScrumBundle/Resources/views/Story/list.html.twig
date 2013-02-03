@@ -4,26 +4,12 @@
 
     {{ render(controller('MiniTeamScrumBundle:Project:scrumBar', { 'project': project.slug, 'activeTab': status })) }}
 
-    {% set offset = '' %}
-    {% if status == constant('MiniTeam\\ScrumBundle\\Entity\\UserStory::SPRINT_BACKLOG') %}
-        {% set offset = 'offset1' %}
-    {% elseif status == constant('MiniTeam\\ScrumBundle\\Entity\\UserStory::DOING') %}
-        {% set offset = 'offset2' %}
-    {% elseif status == constant('MiniTeam\\ScrumBundle\\Entity\\UserStory::BLOCKED') %}
-        {% set offset = 'offset3' %}
-    {% elseif status == constant('MiniTeam\\ScrumBundle\\Entity\\UserStory::TO_VALIDATE') %}
-        {% set offset = 'offset4' %}
-    {% elseif status == constant('MiniTeam\\ScrumBundle\\Entity\\UserStory::DONE') %}
-        {% set offset = 'offset5' %}
-    {% endif %}
-
-
     <div class="row">
-        <div class="span7 {{ offset }}">
-
-            <div class="centered">
-                <h3>{{ status }}</h3>
-            </div>
+        <div class="centered">
+            <h3>{{ status }}</h3>
+        </div>
+    
+        <div class="span4">
 
             {%  for story in stories %}
 
@@ -38,6 +24,56 @@
             {% endfor %}
         </div>
 
+        {% set story = story|default(stories[0]) %}
+        <div class="span8">
+            <div class="row-fluid">
+                <div class="well">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <p class="lead">
+                                <span class="gray-text">#{{ story.number }}</span>
+                                {{ story.title }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 offset1">
+                            {{ story.details }}
+                        </div>
+                        <div class="span1 offset3">
+                            <p class="lead text-info">{{ story.points }} pts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- gestion du statut de la user story -->
+
+                <div class="row-fluid">
+                    <div class="span2">
+                    {% if story.isPlanned %}
+                        <a class="btn btn-inverse" id="unplan" href="{{ path('story_unplan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-fast-backward icon-white"></i> Remove from sprint</a>
+                    {% elseif story.isInProgress %}
+                        <a class="btn btn-danger" id="blocked"><i class="icon-ban-circle icon-white"></i> Blocked</a>
+                    {% endif %}
+                    </div>
+                    <div class="span8 centered">
+                        <span class="label label-info" id="status">{{ story.status }}</span>
+                        {% if story.isAssigned %}
+                            <br><span id="assignee">{{ story.assignee.username }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="span2 align-right">
+                    {% if story.isInBacklog %}
+                        <a class="btn btn-info" id="plan" href="{{ path('story_plan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-plus icon-white"></i> Plan for next sprint</a>
+                    {% elseif story.isPlanned %}
+                        <a class="btn btn-info" id="start" href="{{ path('story_start', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-play icon-white"></i> Start</a>
+                    {% elseif story.isInProgress %}
+                        <a class="btn btn-success" id="deliver" href="{{ path('story_deliver', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-ok icon-white"></i> Deliver</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
