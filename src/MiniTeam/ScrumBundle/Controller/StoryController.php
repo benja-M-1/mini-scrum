@@ -22,7 +22,7 @@ class StoryController extends Controller
 {
 
     /**
-     * @Extra\Route("/us/{id}", name="story_show", requirements={"id" = "\d+"})
+     * @Extra\Route("/us/{id}", name="mtscrum_story_show", requirements={"id" = "\d+"})
      * @Extra\Template()
      */
     public function showAction(Project $project, UserStory $story)
@@ -41,7 +41,7 @@ class StoryController extends Controller
     }
 
     /**
-     * @Extra\Route("/us-list/{status}", name="story_list")
+     * @Extra\Route("/us-list/{status}", name="mtscrum_story_list")
      * @Extra\Template()
      */
     public function listAction(Project $project, $status)
@@ -60,7 +60,7 @@ class StoryController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    'story_show',
+                    'mtscrum_story_show',
                     array(
                         'project' => $story->getProject()->getSlug(),
                         'id'      => $story->getId()
@@ -73,7 +73,7 @@ class StoryController extends Controller
     }
 
     /**
-     * @Extra\Route("/us/new", name="story_new")
+     * @Extra\Route("/us/new", name="mtscrum_story_new")
      * @Extra\Template()
      */
     public function newAction(Project $project, Request $request)
@@ -115,7 +115,7 @@ class StoryController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    'story_show',
+                    'mtscrum_story_show',
                     array(
                         'project' => $story->getProject()->getSlug(),
                         'id' => $story->getId()
@@ -126,14 +126,14 @@ class StoryController extends Controller
     }
 
     /**
-     * @Extra\Route("/us/{id}/unplan", name="story_unplan", defaults={"status": "unplan"})
-     * @Extra\Route("/us/{id}/plan", name="story_plan", defaults={"status": "plan"})
-     * @Extra\Route("/us/{id}/start", name="story_start", defaults={"status": "start"})
-     * @Extra\Route("/us/{id}/deliver", name="story_deliver", defaults={"status": "deliver"}))
-     * @Extra\Route("/us/{id}/refuse", name="story_refuse", defaults={"status": "refuse"}))
-     * @Extra\Route("/us/{id}/accept", name="story_accept", defaults={"status": "accept"}))
-     * @Extra\Route("/us/{id}/block", name="story_block", defaults={"status": "block"}))
-     * @Extra\Route("/us/{id}/deblock", name="story_deblock", defaults={"status": "deblock"}))
+     * @Extra\Route("/us/{id}/unplan", name="mtscrum_story_unplan", defaults={"status": "unplan"})
+     * @Extra\Route("/us/{id}/plan", name="mtscrum_story_plan", defaults={"status": "plan"})
+     * @Extra\Route("/us/{id}/start", name="mtscrum_story_start", defaults={"status": "start"})
+     * @Extra\Route("/us/{id}/deliver", name="mtscrum_story_deliver", defaults={"status": "deliver"}))
+     * @Extra\Route("/us/{id}/refuse", name="mtscrum_story_refuse", defaults={"status": "refuse"}))
+     * @Extra\Route("/us/{id}/accept", name="mtscrum_story_accept", defaults={"status": "accept"}))
+     * @Extra\Route("/us/{id}/block", name="mtscrum_story_block", defaults={"status": "block"}))
+     * @Extra\Route("/us/{id}/deblock", name="mtscrum_story_deblock", defaults={"status": "deblock"}))
      *
      * @param \MiniTeam\ScrumBundle\Entity\UserStory $story
      * @param                                        $status
@@ -173,14 +173,14 @@ class StoryController extends Controller
         $em->persist($story);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('story_show', array(
+        return $this->redirect($this->generateUrl('mtscrum_story_show', array(
             'project' => $story->getProject()->getSlug(),
             'id' => $story->getId()
         )));
     }
 
     /**
-     * @Extra\Route("/us/{id}/delete", name="story_delete")
+     * @Extra\Route("/us/{id}/delete", name="mtscrum_story_delete")
      *
      * @param \MiniTeam\ScrumBundle\Entity\UserStory $story
      *
@@ -197,7 +197,7 @@ class StoryController extends Controller
 
         return $this->redirect(
             $this->generateUrl(
-                'story_list',
+                'mtscrum_story_list',
                 array(
                     'status' => $status,
                     'project' => $project,

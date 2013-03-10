@@ -27,7 +27,7 @@
 
             {%  for story in stories %}
 
-            <a href="{{ path('story_show', { 'project': project.slug,'id': story.id }) }}">
+            <a href="{{ path('mtscrum_story_show', { 'project': project.slug,'id': story.id }) }}">
                 <div class="well user-story">
                     <p class="text-info pull-right">{{ story.points }} pts</p>
                     <span class="gray-text">#{{ story.number }}</span>

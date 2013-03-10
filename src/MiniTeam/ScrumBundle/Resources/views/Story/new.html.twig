@@ -4,7 +4,7 @@
 
     {{ render(controller('MiniTeamScrumBundle:Project:scrumBar', { 'project': project.slug,'activeTab':'us'})) }}
 
-    <form action="{{ path('story_new',{'project':project}) }}" method="post">
+    <form action="{{ path('mtscrum_story_new',{'project':project}) }}" method="post">
 
         <div class="row" style="margin-top: 50px;">
 
@@ -41,7 +41,7 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary pull-right">Save</button>
-            <a href="{{ path('project_show', {'project':project}) }}" type="button" class="btn">Cancel</a>
+            <a href="{{ path('mtscrum_project_show', {'project':project}) }}" type="button" class="btn">Cancel</a>
         </div>
 
     </form>

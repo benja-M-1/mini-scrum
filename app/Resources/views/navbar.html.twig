@@ -4,13 +4,13 @@
 
     {% if app.user != null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div class="nav pull-center">
-            <a href="{{ path('project_show', {'project': app.user.selectedProject.slug}) }}">{{ app.user.selectedProject }}</a>
+            <a href="{{ path('mtscrum_project_show', {'project': app.user.selectedProject.slug}) }}">{{ app.user.selectedProject }}</a>
         </div>
 
         <ul class="nav pull-right">
             <li>
                 <div>
-                    <a href="{{ path('story_new', { 'project': app.user.selectedProject.name }) }}" class="btn btn-success"><i class="icon-pencil icon-white"></i> Add user story</a>
+                    <a href="{{ path('mtscrum_story_new', { 'project': app.user.selectedProject.name }) }}" class="btn btn-success"><i class="icon-pencil icon-white"></i> Add user story</a>
                 </div>
             </li>
             <li class="divider-vertical"></li>

@@ -12,18 +12,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as Extra;
 class ProjectController extends Controller
 {
     /**
-     * @Extra\Route("/{project}", name="project_show")
+     * @Extra\Route("/", name="mtscrum_project_index")
+     * @Extra\Template()
+     */
+    public function indexAction()
+    {
+        $project = $this->getUser()->getSelectedProject();
+        $url     = $this->generateUrl('mtscrum_project_show', array('project' => $project->getSlug()));
+
+        return $this->redirect($url);
+    }
+
+    /**
+     * @Extra\Route("/{project}", name="mtscrum_project_show")
      * @Extra\Template()
      */
     public function showAction(Project $project = null)
     {
-        if (null == $project) {
-            $project = $this->getUser()->getSelectedProject();
-            $url     = $this->generateUrl('project_show', array('project' => $project->getSlug()));
-
-            return $this->redirect($url);
-        }
-
         return array('project' => $project);
     }
 

@@ -18,7 +18,7 @@ use Symfony\Component\Form\Form;
 class CommentController extends Controller
 {
     /**
-     * @Extra\Route("/comment/new", name="comment_new")
+     * @Extra\Route("/comment/new", name="mtscrum_comment_new")
      * @Extra\ParamConverter("story", options={"mapping": {"story": "id"}})
      * @Extra\Template()
      */
@@ -41,7 +41,7 @@ class CommentController extends Controller
             }
         }
 
-        $this->redirect($this->generateUrl('project_show'));
+        $this->redirect($this->generateUrl('mtscrum_project_show'));
     }
 
     /**
@@ -69,7 +69,7 @@ class CommentController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    'story_show',
+                    'mtscrum_story_show',
                     array(
                         'project' => $comment->getStory()->getProject()->getSlug(),
                         'id' => $comment->getStory()->getId()

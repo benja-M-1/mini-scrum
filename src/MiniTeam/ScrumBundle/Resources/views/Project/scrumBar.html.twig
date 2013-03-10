@@ -1,7 +1,7 @@
 {% macro item(label, badgeClass,ticketNumber, tabName, activeTab) %}
 
     <li{% if tabName == activeTab %} class="active"{% endif %}>
-        <a href="{{ path('story_list', { 'project': app.user.selectedProject,'status':tabName }) }}"
+        <a href="{{ path('mtscrum_story_list', { 'project': app.user.selectedProject,'status':tabName }) }}"
            class="centered">
             {{ label }}
             <br>
@@ -17,7 +17,7 @@
         <div class="pagination pagination-large pagination-centered">
             <ul>
                 <li class="{% if activeTab == 'home' %}active{% endif %}">
-                    <a href="{{ path('project_show', {'project':project}) }}" class="centered">
+                    <a href="{{ path('mtscrum_project_show', {'project':project}) }}" class="centered">
                         Home
                         <br>
                         <i class="icon-home"></i>

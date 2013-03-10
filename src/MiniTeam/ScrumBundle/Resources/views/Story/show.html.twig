@@ -78,7 +78,7 @@
                 {% else %}
                     {% set commentClass='alert story-comment dev-comment' %}
                 {% endif %}
-                <form action="{{ path('comment_new',{ 'project': project.slug, 'story': story.id }) }}" method="post" class="form-inline">
+                <form action="{{ path('mtscrum_comment_new',{ 'project': project.slug, 'story': story.id }) }}" method="post" class="form-inline">
                     <div class="{{ commentClass }}">
                         <strong>{{ app.user.username }}: </strong>
                         {{ form_widget(
@@ -117,13 +117,13 @@
 
 {% block product_owner_left_buttons %}
     {% if story.isInBacklog %}
-        <a class="btn btn-danger" href="{{ path('story_delete', { 'project': project.slug, 'id': story.id }) }}" id="delete"><i class="icon-trash icon-white"></i> Delete</a>
+        <a class="btn btn-danger" href="{{ path('mtscrum_story_delete', { 'project': project.slug, 'id': story.id }) }}" id="delete"><i class="icon-trash icon-white"></i> Delete</a>
     {% elseif story.isPlanned %}
-        <a class="btn btn-inverse" id="unplan" href="{{ path('story_unplan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-fast-backward icon-white"></i> Remove from sprint</a>
+        <a class="btn btn-inverse" id="unplan" href="{{ path('mtscrum_story_unplan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-fast-backward icon-white"></i> Remove from sprint</a>
     {% elseif story.isInProgress %}
         <a class="btn btn-danger" id="blocked" href="#"><i class="icon-ban-circle icon-white"></i> Blocked</a>
     {% elseif story.isDelivered %}
-        <a class="btn btn-danger" id="refuse" href="{{ path('story_refuse', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-thumbs-down icon-white"></i> Refuse</a>
+        <a class="btn btn-danger" id="refuse" href="{{ path('mtscrum_story_refuse', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-thumbs-down icon-white"></i> Refuse</a>
     {% elseif story.isDone %}
         <a class="btn btn-inverse"><i class="icon-hand-up icon-white"></i> Oops</a>
     {% endif %}
@@ -131,17 +131,17 @@
 
 {% block product_owner_right_buttons %}
     {% if story.isInBacklog %}
-        <a class="btn btn-info" id="plan" href="{{ path('story_plan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-plus icon-white"></i> Plan for next sprint</a>
+        <a class="btn btn-info" id="plan" href="{{ path('mtscrum_story_plan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-plus icon-white"></i> Plan for next sprint</a>
     {% elseif story.isBlocked %}
-        <a class="btn btn-success" id="deblock" href="{{ path('story_deblock', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-hand-down icon-white"></i> Deblock</a>
+        <a class="btn btn-success" id="deblock" href="{{ path('mtscrum_story_deblock', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-hand-down icon-white"></i> Deblock</a>
     {% elseif story.isDelivered %}
-        <a class="btn btn-success" id="accept" href="{{ path('story_accept', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-thumbs-up icon-white"></i> Accept</a>
+        <a class="btn btn-success" id="accept" href="{{ path('mtscrum_story_accept', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-thumbs-up icon-white"></i> Accept</a>
     {% endif %}
 {% endblock %}
 
 {% block developer_left_buttons %}
     {% if story.isInProgress %}
-        <a class="btn btn-danger" id="block" href="{{ path('story_block', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-ban-circle icon-white"></i> Block</a>
+        <a class="btn btn-danger" id="block" href="{{ path('mtscrum_story_block', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-ban-circle icon-white"></i> Block</a>
     {% elseif story.isDone or story.isDelivered %}
         <a class="btn btn-inverse"><i class="icon-hand-up icon-white"></i> Take back</a>
     {% endif %}
@@ -149,11 +149,11 @@
 
 {% block developer_right_buttons %}
     {% if story.isInBacklog %}
-        <a class="btn btn-info" id="plan" href="{{ path('story_plan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-plus icon-white"></i> Plan for next sprint</a>
+        <a class="btn btn-info" id="plan" href="{{ path('mtscrum_story_plan', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-plus icon-white"></i> Plan for next sprint</a>
     {% elseif story.isPlanned %}
-        <a class="btn btn-info" id="start" href="{{ path('story_start', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-play icon-white"></i> Start</a>
+        <a class="btn btn-info" id="start" href="{{ path('mtscrum_story_start', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-play icon-white"></i> Start</a>
     {% elseif story.isInProgress %}
-        <a class="btn btn-success" id="deliver" href="{{ path('story_deliver', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-ok icon-white"></i> Deliver</a>
+        <a class="btn btn-success" id="deliver" href="{{ path('mtscrum_story_deliver', { 'project': project.slug, 'id': story.id }) }}"><i class="icon-ok icon-white"></i> Deliver</a>
     {% elseif story.isBlocked %}
         <a class="btn btn-success" id="deblock" href=""><i class="icon-hand-down icon-white"></i> Deblock</a>
     {% endif %}
