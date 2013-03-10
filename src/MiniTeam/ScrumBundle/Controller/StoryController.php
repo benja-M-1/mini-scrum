@@ -23,7 +23,6 @@ class StoryController extends Controller
 
     /**
      * @Extra\Route("/us/{id}", name="story_show", requirements={"id" = "\d+"})
-     * @Extra\ParamConverter("project", options={"mapping": {"project": "slug"}})
      * @Extra\Template()
      */
     public function showAction(Project $project, UserStory $story)
@@ -43,7 +42,6 @@ class StoryController extends Controller
 
     /**
      * @Extra\Route("/us-list/{status}", name="story_list")
-     * @Extra\ParamConverter("project", options={"mapping": {"project": "slug"}})
      * @Extra\Template()
      */
     public function listAction(Project $project, $status)
@@ -76,7 +74,6 @@ class StoryController extends Controller
 
     /**
      * @Extra\Route("/us/new", name="story_new")
-     * @Extra\ParamConverter("project", options={"mapping": {"project": "name"}})
      * @Extra\Template()
      */
     public function newAction(Project $project, Request $request)

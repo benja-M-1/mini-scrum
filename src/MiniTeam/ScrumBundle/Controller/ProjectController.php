@@ -13,7 +13,6 @@ class ProjectController extends Controller
 {
     /**
      * @Extra\Route("/{project}", name="project_show")
-     * @Extra\ParamConverter("project", options={ "mapping": { "project": "slug" } })
      * @Extra\Template()
      */
     public function showAction(Project $project = null)
@@ -29,7 +28,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Extra\ParamConverter("project", options={ "mapping": { "project": "slug" } })
      * @Extra\Template()
      */
     public function scrumBarAction(Project $project, $activeTab)
@@ -57,7 +55,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Extra\ParamConverter("project", options={ "mapping": { "project": "slug" } })
      * @Extra\Template()
      */
     public function needFeedbackModuleAction(Project $project)
